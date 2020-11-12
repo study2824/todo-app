@@ -2,6 +2,7 @@ package db
 
 import (
 	"context"
+	"github.com/volatiletech/sqlboiler/boil"
 	"strconv"
 	"todo/api/models"
 )
@@ -16,4 +17,8 @@ func GetOneTodo(n string) ( *models.Todo, error) {
 		return nil, err
 	}
 	return models.FindTodo(context.Background(), DB, id)
+}
+
+func AddTodo(reqTodo models.Todo) error {
+	return reqTodo.Insert(context.Background(), DB, boil.Infer())
 }
