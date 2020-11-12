@@ -24,7 +24,8 @@ func router() *gin.Engine {
 	r.GET("/todo", ctrl.GetAllTodos)
 	r.GET("/todo/:id", ctrl.GetOneTodo)
 	r.POST("/todo/add", ctrl.AddTodo)
-	r.PUT("/todo/update", ctrl.UpdateTodo)
+	r.PUT("/todo/:id/update", ctrl.UpdateTodo)
+	r.DELETE("/todo/:id/delete", ctrl.DeleteTodo)
 
 	return r
 }

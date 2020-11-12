@@ -19,7 +19,7 @@ func GetOneTodo(n string) (*models.Todo, error) {
 	return models.FindTodo(context.Background(), DB, id)
 }
 
-func GetLastTodo()(*models.Todo, error) {
+func GetLastTodo() (*models.Todo, error) {
 	allTodo, err := GetAllTodos()
 	if err != nil {
 		return nil, err
@@ -35,5 +35,15 @@ func AddTodo(reqTodo models.Todo) error {
 
 func UpdateTodo(reqTodo models.Todo) error {
 	_, err := reqTodo.Update(context.Background(), DB, boil.Infer())
+	return err
+}
+
+func DeleteTodo(id string) error {
+	todo, err := GetOneTodo(id)
+	if err != nil {
+		return err
+	}
+
+	_, err = todo.Delete(context.Background(), DB)
 	return err
 }

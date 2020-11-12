@@ -49,7 +49,7 @@ func (Controller) AddTodo(c *gin.Context) {
 }
 
 func (Controller) UpdateTodo(c *gin.Context) {
-	id, err := strconv.Atoi(c.PostForm("id"))
+	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {
 		ErrMsg(err, c)
 		return
@@ -68,4 +68,22 @@ func (Controller) UpdateTodo(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"updated todo": reqTodo})
+}
+
+func (Controller) DeleteTodo(c *gin.Context) {
+	id := c.Param("id")
+	deletedTodo, err := db.GetOneTodo(id)
+	if err != nil {
+		ErrMsg(err, c)
+		return
+	}
+
+	err = db.DeleteTodo(id)
+	if err != nil {
+		ErrMsg(err, c)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"deleted todo": deletedTodo})
+
 }
