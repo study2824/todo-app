@@ -2,6 +2,7 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/cors"
 	"todo/api/controller"
 )
 
@@ -14,6 +15,11 @@ func router() *gin.Engine {
 	r := gin.Default()
 
 	ctrl := controller.Controller{}
+
+	// 全ての
+	config := cors.DefaultConfig()
+	config.AllowOrigins = []string{"*"}
+	r.Use(cors.New(config))
 
 	r.GET("/todo", ctrl.GetAllTodos)
 	r.GET("/todo/:id", ctrl.GetOneTodo)
