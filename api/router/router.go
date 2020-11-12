@@ -15,7 +15,7 @@ func router() *gin.Engine {
 
 	ctrl := controller.Controller{}
 
-	r.GET("/task/all", ctrl.GetAllTask)
+	r.GET("/task/all", ctrl.GetAllTodo)
 
 	return r
 }

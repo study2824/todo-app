@@ -6,7 +6,7 @@ import (
 	"todo/api/db"
 )
 
-func (Controller) GetAllTask(c *gin.Context) {
+func (Controller) GetAllTodo(c *gin.Context) {
 	tasks, err := db.GetAllTodo()
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
