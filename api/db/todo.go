@@ -32,3 +32,8 @@ func GetLastTodo()(*models.Todo, error) {
 func AddTodo(reqTodo models.Todo) error {
 	return reqTodo.Insert(context.Background(), DB, boil.Infer())
 }
+
+func UpdateTodo(reqTodo models.Todo) error {
+	_, err := reqTodo.Update(context.Background(), DB, boil.Infer())
+	return err
+}

@@ -3,6 +3,7 @@ package controller
 import (
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"strconv"
 	"todo/api/db"
 	"todo/api/models"
 )
@@ -45,4 +46,26 @@ func (Controller) AddTodo(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{"added todo": createdTodo})
+}
+
+func (Controller) UpdateTodo(c *gin.Context) {
+	id, err := strconv.Atoi(c.PostForm("id"))
+	if err != nil {
+		ErrMsg(err, c)
+		return
+	}
+
+	reqTodo := models.Todo{
+		ID:    id,
+		Title: c.PostForm("title"),
+		Text:  c.PostForm("text"),
+	}
+
+	err = db.UpdateTodo(reqTodo)
+	if err != nil {
+		ErrMsg(err, c)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"updated todo": reqTodo})
 }
