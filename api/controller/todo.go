@@ -39,5 +39,10 @@ func (Controller) AddTodo(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"added todo": reqTodo})
+	createdTodo, err := db.GetLastTodo()
+	if err != nil {
+		ErrMsg(err, c)
+	}
+
+	c.JSON(http.StatusOK, gin.H{"added todo": createdTodo})
 }

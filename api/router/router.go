@@ -16,7 +16,7 @@ func router() *gin.Engine {
 
 	ctrl := controller.Controller{}
 
-	// 全ての
+	// 全てのドメインのアクセス許可
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"*"}
 	r.Use(cors.New(config))
