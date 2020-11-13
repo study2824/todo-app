@@ -1,8 +1,8 @@
 package router
 
 import (
-	"github.com/gin-gonic/gin"
 	"github.com/gin-contrib/cors"
+	"github.com/gin-gonic/gin"
 	"todo/api/controller"
 )
 
@@ -26,6 +26,6 @@ func router() *gin.Engine {
 	r.POST("/todo/add", ctrl.AddTodo)
 	r.PUT("/todo/:id/update", ctrl.UpdateTodo)
 	r.DELETE("/todo/:id/delete", ctrl.DeleteTodo)
-
+	r.POST("/search", ctrl.SearchTodo)
 	return r
 }

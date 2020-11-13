@@ -87,3 +87,15 @@ func (Controller) DeleteTodo(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"deleted todo": deletedTodo})
 
 }
+
+func (Controller) SearchTodo(c *gin.Context) {
+	target := c.PostForm("target")
+	keyword := c.PostForm("keyword")
+	todos, err := db.SearchTodo(target, keyword)
+	if err != nil {
+		ErrMsg(err, c)
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"result": todos})
+}

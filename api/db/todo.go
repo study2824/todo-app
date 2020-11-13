@@ -3,6 +3,7 @@ package db
 import (
 	"context"
 	"github.com/volatiletech/sqlboiler/boil"
+	"github.com/volatiletech/sqlboiler/queries/qm"
 	"strconv"
 	"todo/api/models"
 )
@@ -46,4 +47,12 @@ func DeleteTodo(id string) error {
 
 	_, err = todo.Delete(context.Background(), DB)
 	return err
+}
+
+func SearchTodo(target string,keyword string) (models.TodoSlice, error) {
+	clause := target + " like ?"
+	args := `%`+keyword+`%`
+	return models.Todos(qm.Select("*"),
+		qm.Where(clause, args)).
+		All(context.Background(), DB)
 }
