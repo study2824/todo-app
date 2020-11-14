@@ -15,7 +15,7 @@ func (Controller) GetAllTodos(c *gin.Context) {
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"tasks": todos})
+	c.JSON(http.StatusOK, gin.H{"todos": todos})
 }
 
 func (Controller) GetOneTodo(c *gin.Context) {

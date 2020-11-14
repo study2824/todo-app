@@ -27,7 +27,7 @@ export default function BasicTable() {
     const getAllTodo = async () => {
         try {
             const response = await axios.get(url);
-            const arrayPost = response.data.tasks;
+            const arrayPost = response.data.todos;
             setRows(arrayPost);
             console.log(arrayPost);
         } catch (error){
